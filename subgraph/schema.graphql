@@ -1,0 +1,68 @@
+type MEVAttack @entity {
+  id: ID!
+  attacker: Attacker!
+  victim: Victim!
+  profit: BigInt!
+  attackType: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  frontrunTx: Transaction!
+  backrunTx: Transaction
+  victimTx: Transaction!
+  gasUsed: BigInt!
+  gasPrice: BigInt!
+}
+
+type Transaction @entity {
+  id: ID!
+  hash: String!
+  from: Attacker!
+  to: String!
+  value: BigInt!
+  gasPrice: BigInt!
+  gasLimit: BigInt!
+  gasUsed: BigInt
+  nonce: BigInt!
+  data: String!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  isSwap: Boolean!
+  swapMethod: String
+  mevAttacks: [MEVAttack!]! @derivedFrom(field: "frontrunTx")
+  victimAttacks: [MEVAttack!]! @derivedFrom(field: "victimTx")
+  backrunAttacks: [MEVAttack!]! @derivedFrom(field: "backrunTx")
+}
+
+type Attacker @entity {
+  id: ID!
+  address: String!
+  totalAttacks: BigInt!
+  totalProfit: BigInt!
+  firstAttack: BigInt!
+  lastAttack: BigInt!
+  attackTypes: [String!]!
+  frontrunAttacks: [MEVAttack!]! @derivedFrom(field: "attacker")
+  transactions: [Transaction!]! @derivedFrom(field: "from")
+}
+
+type Victim @entity {
+  id: ID!
+  address: String!
+  totalAttacks: BigInt!
+  totalLoss: BigInt!
+  firstAttack: BigInt!
+  lastAttack: BigInt!
+  victimAttacks: [MEVAttack!]! @derivedFrom(field: "victim")
+}
+
+type MEVStats @entity {
+  id: ID!
+  totalAttacks: BigInt!
+  totalProfit: BigInt!
+  totalLoss: BigInt!
+  uniqueAttackers: BigInt!
+  uniqueVictims: BigInt!
+  sandwichAttacks: BigInt!
+  frontrunningAttacks: BigInt!
+  lastUpdated: BigInt!
+} 

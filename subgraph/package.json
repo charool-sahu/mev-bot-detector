@@ -1,0 +1,21 @@
+{
+  "name": "mev-detector-subgraph",
+  "version": "1.0.0",
+  "description": "The Graph subgraph for MEV attack detection and historical pattern analysis",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ mev-detector",
+    "create-local": "graph create --node http://localhost:8020/ mev-detector",
+    "remove-local": "graph remove --node http://localhost:8020/ mev-detector",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 mev-detector"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.45.0",
+    "@graphprotocol/graph-ts": "^0.27.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0"
+  }
+} 
