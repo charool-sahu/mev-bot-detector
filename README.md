@@ -335,14 +335,6 @@ mev-bot-detector/
 3. Add corresponding tests
 4. Update The Graph schema if needed
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
 ## 📄 License
 
 MIT License - see LICENSE file for details
